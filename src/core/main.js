@@ -8,8 +8,17 @@ const dispatch = (data) => {
 }
 
 const createDefaultWindow = () => {
-  win = new BrowserWindow()
-
+  win = new BrowserWindow({
+	   webPreferences: {
+			nodeIntegration: true,
+			contextIsolation: false,
+		}
+  })
+	Object.defineProperty(app, 'isPackaged', {
+	   get() {
+		 return true;
+		 }
+	 });
   win.on('closed', () => {
     win = null
   })
