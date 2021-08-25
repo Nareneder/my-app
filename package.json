@@ -30,7 +30,7 @@
     },
     "publish": {
       "provider": "github",
-      "token": "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"
+      "token": "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"
     }
   },
   "dependencies": {
