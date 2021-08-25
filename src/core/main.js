@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const { autoUpdater } = require('electron-updater');
-const server = "https://hazel.scarvite.now.sh/"
+const server = "https://github.com/Nareneder/my-app/releases/"
 const feed = `${server}/update/${process.platform}/${app.getVersion()}`
 
 let mainWindow;
