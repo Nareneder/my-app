@@ -1,6 +1,6 @@
 {
   "name": "Testing-Version",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Love for NodeJS",
   "main": "src/core/main.js",
   "scripts": {
@@ -30,7 +30,7 @@
     },
     "publish": {
       "provider": "github",
-      "token": "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"
+      "token": "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"
     }
   },
   "dependencies": {
