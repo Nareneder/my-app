@@ -9,7 +9,7 @@
     "dist": "electron-builder",
     "postinstall": "electron-builder install-app-deps",
     "release": "build",
-    "deploy": "electron-builder build --mac --win --publish always"
+    "deploy": "electron-builder build --win --publish always"
   },
   "repository": {
     "type": "git",
@@ -24,14 +24,13 @@
   "build": {
     "appId": "com.nik.test",
     "productName": "test-app",
-	"publisher":"Narender"
 	"mac": {
       "category": "public.app-category.developer-tools",
       "type": "distribution"
     },
     "publish": {
       "provider": "github",
-      "token": "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"
+      "token": "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"
     }
   },
   "dependencies": {
