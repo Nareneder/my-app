@@ -1,5 +1,7 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const { autoUpdater } = require('electron-updater');
+const server = "https://hazel.scarvite.now.sh/"
+const feed = `${server}/update/${process.platform}/${app.getVersion()}`
 
 let mainWindow;
 
@@ -42,14 +44,28 @@ ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
 });
 
-autoUpdater.on('update-available', () => {
-  mainWindow.webContents.send('update_available');
-});
+autoUpdater.setFeedURL(feed)
 
-autoUpdater.on('update-downloaded', () => {
-  mainWindow.webContents.send('update_downloaded');
-});
+setInterval(() => {
+    autoUpdater.checkForUpdates()
+}, 60000)
 
-ipcMain.on('restart_app', () => {
-  autoUpdater.quitAndInstall();
-});
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+    const dialogOpts = {
+        type: 'info',
+        buttons: ['Restart', 'Not Now. On next Restart'],
+        title: 'Update',
+        message: process.platform === 'win32' ? releaseNotes : releaseName,
+        detail: 'A New Version has been Downloaded. Restart Now to Complete the Update.'
+    }
+
+    dialog.showMessageBox(dialogOpts).then((returnValue) => {
+        if (returnValue.response === 0) autoUpdater.quitAndInstall()
+    })
+})
+
+autoUpdater.on('error', message => {
+    console.error('There was a problem updating the application')
+    console.error(message)
+})
+
