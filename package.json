@@ -1,6 +1,6 @@
 {
-  "name": "Testing",
-  "version": "1.0.5",
+  "name": "Testing-Version",
+  "version": "2.0.0",
   "description": "Love for NodeJS",
   "main": "src/core/main.js",
   "scripts": {
@@ -8,29 +8,34 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "postinstall": "electron-builder install-app-deps",
-    "release": "build"
+    "release": "build",
+    "deploy": "electron-builder build --win --publish always"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nareneder/my-app.git"
   },
-  "author": "Narender sharma",
+  "author": "Narender Sharma",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^8.2.4",
+    "electron": "^13.2.2",
     "electron-builder": "^22.3.2"
   },
   "build": {
-    "appId": "com.applyhead.testing",
-    "productName": "testing",
-    "copyright": "Copyright © year Narender sharma",
+    "appId": "com.nik.test",
+    "productName": "test-app",
+    "copyright": "Copyright © year Narender Sharma",
     "mac": {
       "category": "public.app-category.developer-tools",
       "type": "distribution"
     },
-    "publish": [
-      "github"
-    ]
+    "publish": {
+      "provider": "github",
+      "owner": "Nareneder",
+      "repo": "my-app",
+      "private": true,
+      "token": "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"
+    }
   },
   "dependencies": {
     "electron-updater": "^4.0.4"

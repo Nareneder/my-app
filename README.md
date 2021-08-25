@@ -1,2 +1,2 @@
-## testing version
+## Pingo
 A sample electron app.
