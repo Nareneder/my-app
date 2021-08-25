@@ -1,7 +1,6 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const { autoUpdater } = require('electron-updater');
-const server = "https://github.com/Nareneder/my-app/releases/"
-const feed = `${server}/update/${process.platform}/${app.getVersion()}`
+autoUpdater.setFeedURL('https://github.com/Nareneder/my-app/releases')
 
 let mainWindow;
 
@@ -19,13 +18,19 @@ function createWindow () {
     mainWindow = null;
   });
   mainWindow.once('ready-to-show', () => {
-    autoUpdater.checkForUpdates();
+	  autoUpdater.checkForUpdates()
   });
 }
 
 app.on('ready', () => {
   createWindow();
-  app.allowRendererProcessReuse = true
+  updateApp = require('update-electron-app');
+
+    updateApp({
+        // repo: 'PhiloNL/electron-hello-world', // defaults to package.json
+        updateInterval: '5 minutes',
+        notifyUser: true
+    });
 });
 
 app.on('window-all-closed', function () {
@@ -44,28 +49,11 @@ ipcMain.on('app_version', (event) => {
   event.sender.send('app_version', { version: app.getVersion() });
 });
 
-autoUpdater.setFeedURL(feed)
-
-setInterval(() => {
-    autoUpdater.checkForUpdates()
-}, 60000)
-
 autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-    const dialogOpts = {
-        type: 'info',
-        buttons: ['Restart', 'Not Now. On next Restart'],
-        title: 'Update',
-        message: process.platform === 'win32' ? releaseNotes : releaseName,
-        detail: 'A New Version has been Downloaded. Restart Now to Complete the Update.'
-    }
-
-    dialog.showMessageBox(dialogOpts).then((returnValue) => {
-        if (returnValue.response === 0) autoUpdater.quitAndInstall()
-    })
+  //
 })
 
-autoUpdater.on('error', message => {
-    console.error('There was a problem updating the application')
-    console.error(message)
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+   autoUpdater.quitAndInstall()
 })
 

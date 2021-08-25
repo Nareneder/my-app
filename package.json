@@ -1,6 +1,6 @@
 {
   "name": "Testing-Version",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Love for NodeJS",
   "main": "src/core/main.js",
   "scripts": {
@@ -33,11 +33,13 @@
       "provider": "github",
       "owner": "Nareneder",
       "repo": "my-app",
-      "token": "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"
+      "token": "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"
     }
   },
   "dependencies": {
-    "electron-updater": "^4.0.4"
+    "@electron-forge/publisher-github": "^6.0.0-beta.59",
+    "electron-updater": "^4.0.4",
+    "update-electron-app": "^2.0.1"
   },
   "bugs": {
     "url": "https://github.com/Nareneder/my-app/issues"
