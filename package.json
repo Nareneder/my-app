@@ -1,6 +1,6 @@
 {
   "name": "Testing-Version",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Love for NodeJS",
   "main": "src/core/main.js",
   "scripts": {
